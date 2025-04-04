@@ -79,15 +79,12 @@ packer.startup(function()
         end
     }
 
-    -- use {
-    --     'nvim-telescope/telescope.nvim', tag = '0.1.4',
-    -- }
-
     use {'stevearc/dressing.nvim'}
 
     use {
         -- "nvim-telescope/telescope.nvim", tag = '0.1.4',
-        "nvim-telescope/telescope.nvim", branch = '0.1.x',
+        -- "nvim-telescope/telescope.nvim", branch = '0.1.x',
+        "nvim-telescope/telescope.nvim", branch = 'master',
         requires = {
             { "nvim-telescope/telescope-live-grep-args.nvim" },
         },
