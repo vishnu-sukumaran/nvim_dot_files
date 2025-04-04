@@ -1,3 +1,5 @@
+local M = {}
+
 vim.o.number = true
 vim.o.relativenumber = true
 -- vim.o.cursorline = true
@@ -47,9 +49,17 @@ vim.cmd([[set foldexpr=nvim_treesitter#foldexpr()]])
 
 
 
+-- option dependent module settings
+function M.setup(user_config)
+	if user_config.theme.name == "catppuccin" then
+		require('settings.catppuccin_settings').setup(user_config.theme.config)
+	else
+		require('settings.catppuccin_settings').setup({})
+	end
+end
+
 -- Settings for the plugins
 require('settings.lualine_settings')
-require('settings.catppuccin_settings')
 require('settings.nvim-tree_settings')
 require('settings.mason_settings')
 require('settings.comment_settings')
@@ -103,4 +113,4 @@ end, {})
 --   vim.opt.clipboard = 'unnamedplus'  -- Use system clipboard for all operations
 -- end
 
-
+return M
