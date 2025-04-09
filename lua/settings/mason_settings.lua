@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "clangd" --[[ , "autotools_ls", "markdown_oxide" ]] }
+    ensure_installed = { "clangd", "lua_ls" --[[ , "autotools_ls", "markdown_oxide" ]] }
 })
 
 
@@ -16,5 +16,6 @@ end
 
 
 require("lspconfig").clangd.setup {}
+require("lspconfig").lua_ls.setup {}
 -- require("lspconfig").autotools_ls.setup {}
 -- require("lspconfig").markdown_oxide.setup {}
