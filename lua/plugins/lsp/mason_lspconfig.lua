@@ -36,7 +36,7 @@ M.plugin_spec = {
         handlers = {
             -- Default handler (runs for all LSPs unless overridden)
             function(server_name)
-                require("lspconfig")[server_name].setup = {
+                require("lspconfig")[server_name].setup {
                     on_attach = lsp_set_keymapping,
                 }
             end,

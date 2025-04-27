@@ -2,6 +2,28 @@ local M = {}
 -- Shows addition, deletion and change signs.
 -- Handles hunks - Stage, reset, preview, etc...
 
+-- Interactively change the Gitsigns base to a selected item (sha or name) from Telescope
+local custom_keymappings = function()
+    local change_base_through_telescope_picker = function(picker)
+        local telescope = require("plugins.navigation.nvim_telescope")
+        local gitsigns = require('gitsigns')
+
+        telescope.get_selected_val_from_picker(function(picker_value)
+            if picker_value then
+                gitsigns.change_base(picker_value)
+            end
+        end, picker)
+    end
+
+    vim.keymap.set("n", "<leader>hg", function()
+        change_base_through_telescope_picker("log")
+    end, { desc = "Gitsigns: Change base to commit" })
+
+    vim.keymap.set("n", "<leader>hG", function()
+        change_base_through_telescope_picker("branch")
+    end, { desc = "Gitsigns: Change base to branch" })
+end
+
 local gitsigns_on_attach = function(bufnr)
     local gitsigns = require('gitsigns')
 
@@ -57,6 +79,7 @@ local gitsigns_on_attach = function(bufnr)
     -- Text object
     map({'o', 'x'}, 'ih', gitsigns.select_hunk, { desc = "Select hunk" })
     map('n', '<leader>ih', gitsigns.select_hunk, { desc = "Select hunk" })
+    custom_keymappings()
 end
 
 M.plugin_spec = {
