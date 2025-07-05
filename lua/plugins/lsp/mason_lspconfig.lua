@@ -32,13 +32,18 @@ end
 M.plugin_spec = {
     "williamboman/mason-lspconfig.nvim",
     version = "1.32.0",
+    dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+    },
     opts = {
         ensure_installed = get_lsp_list(),
         handlers = {
             -- Default handler (runs for all LSPs unless overridden)
             function(server_name)
+                local capabilities = require("cmp_nvim_lsp").default_capabilities()
                 require("lspconfig")[server_name].setup {
                     on_attach = lsp_set_keymapping,
+                    capabilities = capabilities -- required for autocompletion
                 }
             end,
         },
