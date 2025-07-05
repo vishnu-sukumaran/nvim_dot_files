@@ -83,8 +83,10 @@ local get_nvim_telescope_opts = function()
                 i = {
                     ["<C-k>"] = lga_actions.quote_prompt(),
                     -- ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }), -- Ctrl i is the same as tab. Accidental tab press also triggers this.
-                    ["<C-j>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                    ["<C-k>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
                     ["<C-o>"] = lga_actions.quote_prompt({ postfix = " --iglob {*.c,*.h} --iglob !{**/build/**,*cscope*}" }),
+                    -- TODO: Need to implement unqote to revert accidentel quoting.
+                    -- ["<C-u>"] = lga_actions.unquote_promp()
                 },
             },
         }
