@@ -21,4 +21,5 @@ return {
     get_plugin_spec("mason"),
     get_plugin_spec("mason_lspconfig"),
     get_plugin_spec("neodev"),
+    get_plugin_spec("aerial"),
 }
