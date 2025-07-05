@@ -9,10 +9,23 @@ vim.o.relativenumber = true
 vim.o.textwidth = 79
 
 -- TO CHECK formatoptions
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-vim.o.expandtab = true
+vim.o.tabstop = 4       -- How you see the tab
+vim.o.shiftwidth = 4    -- How many spaces when you do >> or << in normal mode
+vim.o.softtabstop = 4   -- How many spaces when you press tab
+vim.o.expandtab = true  -- Convert tab to spaces
+
+
+-- TODO: This is temporary workaround as tab space seems to have been messed up
+-- probably after nvim_cmp (not sure).
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    callback = function ()
+        vim.bo.tabstop = 4
+        vim.bo.shiftwidth = 4
+        vim.bo.softtabstop = 4
+        vim.bo.expandtab = true
+    end,
+})
 
 
 vim.o.scrolloff = 3
