@@ -26,4 +26,5 @@ return {
     get_plugin_spec("bookmarks"),
     get_plugin_spec("nvim_bqf"),
     get_plugin_spec("vim_indentwise"),
+    get_plugin_spec("markdown_preview"),
 }
