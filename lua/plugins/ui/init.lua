@@ -25,4 +25,5 @@ return {
     get_plugin_spec("scrollbar"),
     get_plugin_spec("neoscroll"),
     get_plugin_spec("dressing"),
+    get_plugin_spec("nvim-ufo"),
 }

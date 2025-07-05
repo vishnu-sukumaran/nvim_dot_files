@@ -23,8 +23,18 @@ vim.o.showmatch = true
 -- vim.opt.smartindent = false
 
 -- fold settings
-vim.o.foldmethod = "syntax"
-vim.o.foldenable = false
+-- TODO: Fix - Commented out when nvim-ufo was installed due to conflict.
+-- vim.o.foldmethod = "syntax"
+-- vim.o.foldenable = false
+
+-- TODO: Commented as didn't work. Tried when nvim-ufo was installed due to conflict.
+-- vim.opt.foldmethod   = "expr"
+-- vim.opt.foldexpr     = "nvim_treesitter#foldexpr()"
+--
+-- -- Optional: start with everything open
+-- vim.opt.foldlevel        = 99
+-- vim.opt.foldlevelstart   = 99
+
 
 -- Create a user command for toggling copy mode
 local ibl = require('plugins.ui.indent_blankline')
