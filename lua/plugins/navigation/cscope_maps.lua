@@ -1,26 +1,26 @@
 local M = {}
 -- cscope
 
-local map_ctrl_left_clik_go_to_definition = function()
-    -- Function to navigate to definition at mouse position
-    -- Define the function globally
-    _G.goto_definition_under_mouse = function()
-        -- Get the mouse position
-        local mouse_pos = vim.fn.getmousepos()
-
-        -- Move the cursor to the mouse position
-        vim.api.nvim_win_set_cursor(0, {mouse_pos.line, mouse_pos.column - 1})
-
-        -- Get the word under the mouse
-        local word = vim.fn.expand('<cword>')
-
-        -- Use cscope to find the definition of the word
-        vim.cmd('Cs find g ' .. word)
-    end
-
-    -- Map <C-LeftMouse> to call the function
-    vim.api.nvim_set_keymap('n', '<C-LeftMouse>', ':lua goto_definition_under_mouse()<CR>', { noremap = true, silent = true })
-end
+-- local map_ctrl_left_clik_go_to_definition = function()
+--     -- Function to navigate to definition at mouse position
+--     -- Define the function globally
+--     _G.goto_definition_under_mouse = function()
+--         -- Get the mouse position
+--         local mouse_pos = vim.fn.getmousepos()
+--
+--         -- Move the cursor to the mouse position
+--         vim.api.nvim_win_set_cursor(0, {mouse_pos.line, mouse_pos.column - 1})
+--
+--         -- Get the word under the mouse
+--         local word = vim.fn.expand('<cword>')
+--
+--         -- Use cscope to find the definition of the word
+--         vim.cmd('Cs find g ' .. word)
+--     end
+--
+--     -- Map <C-LeftMouse> to call the function
+--     vim.api.nvim_set_keymap('n', '<C-LeftMouse>', ':lua goto_definition_under_mouse()<CR>', { noremap = true, silent = true })
+-- end
 
 local cs_stackview_down = function()
     -- Get the word under the cursor
@@ -69,9 +69,9 @@ M.plugin_spec = {
         require("cscope_maps").setup(opts)
         configs_suggested_in_repo()
         vim.api.nvim_set_keymap("n", "<Leader>cB", ":!fd -e c -e h > cscope.files<CR>:Cs db build<CR>", { noremap = true })
-        vim.api.nvim_set_keymap("n", "<Leader>cj", ":lua cs_stackview_down()<CR>", { noremap = true, silent = true })
+        vim.keymap.set("n", "<Leader>cj", function() cs_stackview_down() end, { noremap = true, silent = true })
         vim.api.nvim_set_keymap("n", "<Leader>ck", ":lua cs_stackview_up()<CR>", { noremap = true, silent = true })
-        map_ctrl_left_clik_go_to_definition()
+        -- map_ctrl_left_clik_go_to_definition()
     end,
 }
 
