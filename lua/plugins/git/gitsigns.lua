@@ -96,6 +96,7 @@ M.plugin_spec = {
     config = function(_,opts)
         require("gitsigns").setup(opts)
         require("scrollbar.handlers.gitsigns").setup()
+        require("plugins.git.gitsigns_hunk_op").setup_hunk_op_command()
     end
 }
 
