@@ -31,6 +31,7 @@ end
 
 M.plugin_spec = {
     "williamboman/mason-lspconfig.nvim",
+    version = "1.32.0",
     opts = {
         ensure_installed = get_lsp_list(),
         handlers = {
