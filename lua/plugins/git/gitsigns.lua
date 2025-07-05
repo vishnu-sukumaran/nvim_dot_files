@@ -76,6 +76,11 @@ local gitsigns_on_attach = function(bufnr)
     map('n', '<leader>hQ', function() gitsigns.setqflist('all') end, { desc = "Create quicklist of repo hunks" })
     map('n', '<leader>hq', gitsigns.setqflist, { desc = "Create quicklist of buffer hunks" })
 
+    -- Toggles
+    map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+    map('n', '<leader>td', gitsigns.toggle_deleted)
+    map('n', '<leader>tw', gitsigns.toggle_word_diff)
+
     -- Text object
     map({'o', 'x'}, 'ih', gitsigns.select_hunk, { desc = "Select hunk" })
     map('n', '<leader>ih', gitsigns.select_hunk, { desc = "Select hunk" })
