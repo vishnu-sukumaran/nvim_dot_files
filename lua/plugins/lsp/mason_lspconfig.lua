@@ -2,15 +2,21 @@ local M = {}
 -- A binding between the nvim-lspconfig and mason.
 
 local lsp_set_keymapping = function(_, bufnr)
-    local opts = { buffer = bufnr }
+    local function map(mode, l, r, opts)
+        opts = opts or {}
+        opts.buffer = bufnr
+        vim.keymap.set(mode, l, r, opts)
+    end
 
-    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<leader>gr', require('telescope.builtin').lsp_references, opts)
-    vim.keymap.set('n', '<leader>K', vim.lsp.buf.hover, opts)
+    map('n', '<leader>rn', vim.lsp.buf.rename, { desc = "LSP rename symbol" })
+    map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "LSP code action" })
+    map('n', '<leader>gd', vim.lsp.buf.definition, { desc = "LSP go to definition" })
+    map('n', '<leader>gi', vim.lsp.buf.implementation, { desc = "LSP go to implementation" })
+    map('n', '<leader>gr', require('telescope.builtin').lsp_references, { desc = "LSP references" })
+    map('n', '<leader>K', vim.lsp.buf.hover, { desc = "LSP Hover" })
 end
+
+
 
 -- Language server list
 local lsp_servers = {
@@ -18,6 +24,8 @@ local lsp_servers = {
     lua = "lua_ls",
     markdown = "markdown_oxide",
 }
+
+
 
 local get_lsp_list = function()
     local lsp_list = {}
@@ -28,6 +36,8 @@ local get_lsp_list = function()
 
     return lsp_list
 end
+
+
 
 M.plugin_spec = {
     "williamboman/mason-lspconfig.nvim",
@@ -49,5 +59,6 @@ M.plugin_spec = {
         },
     },
 }
+
 
 return M

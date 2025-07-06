@@ -8,6 +8,8 @@ local M = {}
 -- zp - full height / short height toggle
 --]
 
+
+
 local limit_quickfix_window_height = function(entries)
     vim.api.nvim_create_autocmd('BufWinEnter', {
         callback = function()
@@ -17,6 +19,8 @@ local limit_quickfix_window_height = function(entries)
         end,
     })
 end
+
+
 
 local set_quickfix_toggle_keymap = function()
     vim.keymap.set('n', '<leader>q', function()
@@ -40,6 +44,7 @@ local set_quickfix_toggle_keymap = function()
 end
 
 
+
 M.plugin_spec = {
     "kevinhwang91/nvim-bqf",
 
@@ -58,5 +63,6 @@ M.plugin_spec = {
         set_quickfix_toggle_keymap()
     end
 }
+
 
 return M

@@ -1,7 +1,11 @@
 local M = {}
 -- Gives a scrollbar at the right side
 
+
+
 local user_theme = require("user_config").theme
+
+
 
 -- Customizes the scrollbar colors according to theme
 local function get_scrollbar_opts()
@@ -43,6 +47,7 @@ local function get_scrollbar_opts()
 end
 
 
+
 M.plugin_spec = {
     "petertriho/nvim-scrollbar",
 
@@ -51,5 +56,6 @@ M.plugin_spec = {
         require("scrollbar").setup(opts)
     end
 }
+
 
 return M

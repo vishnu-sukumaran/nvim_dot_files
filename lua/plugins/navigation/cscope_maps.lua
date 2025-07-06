@@ -22,17 +22,23 @@ local M = {}
 --     vim.api.nvim_set_keymap('n', '<C-LeftMouse>', ':lua goto_definition_under_mouse()<CR>', { noremap = true, silent = true })
 -- end
 
+
+
 local cs_stackview_down = function()
     -- Get the word under the cursor
     local word = vim.fn.expand('<cword>')
     vim.cmd('CsStackView open down ' .. word)
 end
 
+
+
 local cs_stackview_up = function()
     -- Get the word under the cursor
     local word = vim.fn.expand('<cword>')
     vim.cmd('CsStackView open up ' .. word)
 end
+
+
 
 local configs_suggested_in_repo = function()
     -- Path to store the cscope files (cscope.files and cscope.out)
@@ -56,6 +62,8 @@ local configs_suggested_in_repo = function()
     -- vim.cmd([[autocmd VimEnter * CScopeUpdate]])
 end
 
+
+
 M.plugin_spec = {
     "dhananjaylatkar/cscope_maps.nvim",
 
@@ -68,11 +76,32 @@ M.plugin_spec = {
     config = function(_, opts)
         require("cscope_maps").setup(opts)
         configs_suggested_in_repo()
-        vim.api.nvim_set_keymap("n", "<Leader>cB", ":!fd -e c -e h > cscope.files<CR>:Cs db build<CR>", { noremap = true })
-        vim.keymap.set("n", "<Leader>cj", function() cs_stackview_down() end, { noremap = true, silent = true })
-        vim.api.nvim_set_keymap("n", "<Leader>ck", ":lua cs_stackview_up()<CR>", { noremap = true, silent = true })
-        -- map_ctrl_left_clik_go_to_definition()
-    end,
+
+        vim.keymap.set("n", "<Leader>cB", ":!fd -e c -e h > cscope.files<CR>:Cs db build<CR>", {
+            noremap = true,
+            silent = true,
+            desc = "Generate cscope.files and build DB",
+        })
+
+        vim.keymap.set("n", "<Leader>cj", function()
+            cs_stackview_down()
+        end, {
+        noremap = true,
+        silent = true,
+        desc = "cscope: stack down",
+    })
+
+    vim.keymap.set("n", "<Leader>ck", function()
+        cs_stackview_up()
+    end, {
+    noremap = true,
+    silent = true,
+    desc = "cscope: stack up",
+})
+
+-- map_ctrl_left_click_go_to_definition()
+end
 }
+
 
 return M

@@ -6,6 +6,8 @@ local search_active = false
 local matched_lines = {}
 local current_match_index = 0
 
+
+
 -- Helper: get hunks or return nil with notification
 local function get_current_hunks()
     local gs = package.loaded.gitsigns
@@ -17,6 +19,8 @@ local function get_current_hunks()
     end
     return hunks, bufnr
 end
+
+
 
 -- Action: Apply :[range]cmd (e.g., substitute)
 local function apply_range_command(hunks, bufnr, cmd_template)
@@ -40,6 +44,8 @@ local function apply_range_command(hunks, bufnr, cmd_template)
     end
 end
 
+
+
 -- Action: Apply normal-mode keys (e.g., ==, >>)
 local function apply_normal_keys(hunks)
     for _, hunk in ipairs(hunks) do
@@ -55,6 +61,8 @@ local function apply_normal_keys(hunks)
         ::continue::
     end
 end
+
+
 
 -- Action: Highlight + jump to search matches
 local function highlight_and_jump_matches(hunks, bufnr, pattern)
@@ -113,6 +121,8 @@ local function highlight_and_jump_matches(hunks, bufnr, pattern)
     end, { buffer = 0, silent = true })
 end
 
+
+
 -- Manual restore of n/N mapping
 function M.reset_n_mappings()
     search_active = false
@@ -121,6 +131,8 @@ function M.reset_n_mappings()
     pcall(vim.keymap.del, "n", "n", { buffer = 0 })
     pcall(vim.keymap.del, "n", "N", { buffer = 0 })
 end
+
+
 
 -- Main dispatcher
 local function apply_to_gitsigns_hunks(action)
@@ -161,6 +173,8 @@ local function setup_disable_command()
     })
 end
 
+
+
 -- Register :GitsignsHunkOp command
 function M.setup_hunk_op_command()
     vim.api.nvim_create_user_command('GitsignsHunkOp', function(opts)
@@ -190,6 +204,8 @@ function M.setup_hunk_op_command()
     setup_disable_command()
 end
 
+
+
 -- Optional auto listener (disabled for now)
 -- local function setup_nohl_listener()
 --     vim.api.nvim_create_autocmd("CmdlineEnter", {
@@ -197,5 +213,6 @@ end
 --         callback = M.reset_n_mappings,
 --     })
 -- end
+
 
 return M

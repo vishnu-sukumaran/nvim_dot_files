@@ -1,6 +1,8 @@
 local M = {}
 -- Modern fold
 
+
+
 local handler = function(virtText, lnum, endLnum, width, truncate)
     local newVirtText = {}
     local suffix = (' 󰁂 %d '):format(endLnum - lnum)
@@ -28,6 +30,7 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     table.insert(newVirtText, {suffix, 'MoreMsg'})
     return newVirtText
 end
+
 
 
 M.plugin_spec = {
@@ -74,14 +77,15 @@ M.plugin_spec = {
         })
 
         -- vim.opt.fillchars:append({
-            --     foldopen = '▾',  -- U+25BE BLACK DOWN-POINTING SMALL TRIANGLE
-            --     foldclose = '▸', -- U+25B8 BLACK RIGHT-POINTING SMALL TRIANGLE
-            --     fold = ' ',
-            --     foldsep = ' ',
-            -- })
+        --     foldopen = '▾',  -- U+25BE BLACK DOWN-POINTING SMALL TRIANGLE
+        --     foldclose = '▸', -- U+25B8 BLACK RIGHT-POINTING SMALL TRIANGLE
+        --     fold = ' ',
+        --     foldsep = ' ',
+        -- })
 
-            require('ufo').setup(opts)
-        end
-    }
+        require('ufo').setup(opts)
+    end
+}
 
-    return M
+
+return M

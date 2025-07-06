@@ -11,6 +11,8 @@ local check_catppuccin_enabled = function()
     end
 end
 
+
+
 M.plugin_spec = {
     "catppuccin/nvim",
     as = "catppuccin",
@@ -23,5 +25,6 @@ M.plugin_spec = {
         vim.api.nvim_command("colorscheme catppuccin-" .. catppuccin_variant.colorscheme)
     end
 }
+
 
 return M

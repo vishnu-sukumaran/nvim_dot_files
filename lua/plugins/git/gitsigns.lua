@@ -2,13 +2,16 @@ local M = {}
 -- Shows addition, deletion and change signs.
 -- Handles hunks - Stage, reset, preview, etc...
 
+
+
 -- Interactively change the Gitsigns base to a selected item (sha or name) from Telescope
 local custom_keymappings = function()
     local change_base_through_telescope_picker = function(picker)
         local telescope = require("plugins.navigation.nvim_telescope")
+        local nvim_telescope_get_val = require('plugins.navigation.nvim_telescope_get_val')
         local gitsigns = require('gitsigns')
 
-        telescope.get_selected_val_from_picker(function(picker_value)
+        nvim_telescope_get_val.get_selected_val_from_picker(function(picker_value)
             if picker_value then
                 gitsigns.change_base(picker_value)
             end
@@ -23,6 +26,8 @@ local custom_keymappings = function()
         change_base_through_telescope_picker("branch")
     end, { desc = "Gitsigns: Change base to branch" })
 end
+
+
 
 local gitsigns_on_attach = function(bufnr)
     local gitsigns = require('gitsigns')
@@ -67,25 +72,27 @@ local gitsigns_on_attach = function(bufnr)
     map('n', '<leader>hp', gitsigns.preview_hunk, { desc = "Preview hunk" })
     map('n', '<leader>hi', gitsigns.preview_hunk_inline, { desc = "Preview hunk inline" })
 
-    map('n', '<leader>hd', gitsigns.diffthis, { desc = "Diff this file" })
+    map('n', '<leader>hd', gitsigns.diffthis, { desc = "Git diff against index" })
 
     map('n', '<leader>hD', function()
         gitsigns.diffthis('~')
-    end, { desc = "Diff - need to be tested" })
+    end, { desc = "Git diff against HEAD~1" })
 
     map('n', '<leader>hQ', function() gitsigns.setqflist('all') end, { desc = "Create quicklist of repo hunks" })
     map('n', '<leader>hq', gitsigns.setqflist, { desc = "Create quicklist of buffer hunks" })
 
     -- Toggles
-    map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-    map('n', '<leader>td', gitsigns.toggle_deleted)
-    map('n', '<leader>tw', gitsigns.toggle_word_diff)
+    map('n', '<leader>htb', gitsigns.toggle_current_line_blame, { desc = "Git blame current line" })
+    map('n', '<leader>htd', gitsigns.toggle_deleted, { desc = "Git toggle inline deleted hunks" })
+    map('n', '<leader>htw', gitsigns.toggle_word_diff, {desc = "Git Toggle word diff" })
 
     -- Text object
     map({'o', 'x'}, 'ih', gitsigns.select_hunk, { desc = "Select hunk" })
     map('n', '<leader>ih', gitsigns.select_hunk, { desc = "Select hunk" })
     custom_keymappings()
 end
+
+
 
 M.plugin_spec = {
     "lewis6991/gitsigns.nvim",

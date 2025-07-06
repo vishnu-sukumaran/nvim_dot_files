@@ -2,7 +2,7 @@
 
 -- Jumping b/w buffers
 vim.keymap.set("n", "<Leader>bn", ":bn<CR>", { desc = "Next buffer" })
-vim.keymap.set("n", "<Leader>bN", ":bp<CR>", { desc = "Prev buffer" })
+vim.keymap.set("n", "<Leader>bp", ":bp<CR>", { desc = "Prev buffer" })
 vim.keymap.set("n", "<Leader>bd", ":bp<bar>sp<bar>bn<bar>bd<CR>", { desc = "Delete buffer" })
 
 vim.keymap.set("n", "<Leader><Space>", ":nohl<CR>", { desc = "Clear search highight" })

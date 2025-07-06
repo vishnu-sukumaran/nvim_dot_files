@@ -22,50 +22,49 @@ local treesitter_config = {
 
     additional_vim_regex_highlighting = false,
 
-    -- indent = {
-        -- 	enable = false
-        -- },
+    textobjects = {
+        select = {
+            enable = true,
+            lookahead = true, -- Automatically jump forward to textobj
 
-        -- "nvim-treesitter/nvim-treesitter-textobjects"
-        textobjects = {
-            select = {
-                enable = true,
-                lookahead = true, -- Automatically jump forward to textobj
-
-                keymaps = {
-                    ["af"] = "@function.outer",
-                    ["if"] = "@function.inner",
-                    ["ac"] = "@class.outer",
-                    ["ic"] = "@class.inner",
-                },
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
             },
+        },
 
-            move = {
-                enable = true,
-                set_jumps = true,
-                goto_next_start = {
-                    ["]f"] = "@function.outer",
-                },
-                goto_previous_start = {
-                    ["[f"] = "@function.outer",
-                },
+        move = {
+            enable = true,
+            set_jumps = true,
+            goto_next_start = {
+                ["]f"] = "@function.outer",
             },
-        }
+            goto_previous_start = {
+                ["[f"] = "@function.outer",
+            },
+        },
     }
+}
 
-    M.plugin_spec = {
-        'nvim-treesitter/nvim-treesitter',
-        build = ":TSUpdate",
 
-        config = function()
-            local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-            if not status_ok then
-                print("treesitter.lua status not ok")
-                return
-            end
 
-            configs.setup(treesitter_config)
+M.plugin_spec = {
+    'nvim-treesitter/nvim-treesitter',
+    build = ":TSUpdate",
+
+    config = function()
+        local status_ok, configs = pcall(require, "nvim-treesitter.configs")
+        if not status_ok then
+            print("treesitter.lua status not ok")
+            return
         end
-    }
 
-    return M
+        configs.setup(treesitter_config)
+    end
+}
+
+
+
+return M

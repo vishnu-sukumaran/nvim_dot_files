@@ -6,13 +6,19 @@ local function is_wsl()
     return uname:lower():find("microsoft") ~= nil
 end
 
+
+
 local function is_ssh()
     return vim.env.SSH_CLIENT or vim.env.SSH_TTY
 end
 
+
+
 -- Determine whether to enable markdown preview
 local enable = false
 local browser = ""
+
+
 
 if is_wsl() and not is_ssh() then
     enable = true
@@ -26,6 +32,8 @@ else
     browser = "xdg-open"
 end
 
+
+
 M.plugin_spec = {
     "iamcco/markdown-preview.nvim",
     ft = { "markdown" },
@@ -37,5 +45,6 @@ M.plugin_spec = {
         vim.g.mkdp_filetypes = { "markdown" }
     end,
 }
+
 
 return M

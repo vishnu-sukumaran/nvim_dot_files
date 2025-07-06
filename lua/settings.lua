@@ -35,6 +35,8 @@ vim.o.smartcase = true
 vim.o.showmatch = true
 -- vim.opt.smartindent = false
 
+
+
 -- fold settings
 -- TODO: Fix - Commented out when nvim-ufo was installed due to conflict.
 -- vim.o.foldmethod = "syntax"
@@ -47,6 +49,7 @@ vim.o.showmatch = true
 -- -- Optional: start with everything open
 -- vim.opt.foldlevel        = 99
 -- vim.opt.foldlevelstart   = 99
+
 
 
 -- Create a user command for toggling copy mode
@@ -65,5 +68,6 @@ vim.api.nvim_create_user_command('ToggleCp', function()
 
     cp_mode = not cp_mode
 end, {})
+
 
 return M
